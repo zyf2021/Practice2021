@@ -5,7 +5,7 @@ import 'materialize-css'
 
 
 function App() {
-  const routes = useRoutes(true)
+  const routes = useRoutes(false)
   return (
     <Router>
     <div className="container">
