@@ -1,59 +1,91 @@
-import React from 'react'
-import image from './media/image2.jpg'
+import React, {useState} from 'react'
+import { useHttp } from '../hooks/http.hook'
 
 export const RegisPage = () => {
+    const {loading, request} = useHttp()
+    const [form, setForm] = useState({
+        name:'', email:'', phone:'', password:'', check_password:''
+    })
+
+    const changeHandler = event =>{
+        setForm({ ...form, [event.target.name]: event.target.value})
+    }
+    
+    const registerHandler = async () => {
+        try {
+            const data = await request ('/api/auth/register', 'POST', {...form})
+            console.log('Data', data)
+        } catch (e) {}
+    }
+
     return(
         <div className = "row">
-            <div className = "col s6 offset-s3">
+            <div className = "col s6 offset-s3 center-align">
                 <h1>Практика 2021</h1>
-                <div class="card blue-grey darken-1">
-                    <div class="card-content white-text">
+                <div class="card amber lighten-5 registration">
+                    <div class="card-content black-text">
                     <span class="card-title">Регистрация</span>
                     <div class="row">
                         <form class="col s12">
-                        <div class="row">
-                            <div class="input-field col s6">
-                            <input placeholder="Placeholder" id="first_name" type="text" class="validate"/>
-                            <label for="first_name">First Name</label>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="name" 
+                                           type="text" 
+                                           class="validate"
+                                           name = "name"
+                                           onChange = {changeHandler}/>
+                                    <label for="name">Имя</label>
+                                </div>
                             </div>
-                            <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate"/>
-                            <label for="last_name">Last Name</label>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="email" 
+                                           type="email" 
+                                           class="validate"
+                                           name = "email"
+                                           onChange = {changeHandler}/>
+                                    <label for="email">Email</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                            <input disabled value="I am not editable" id="disabled" type="text" class="validate"/>
-                            <label for="disabled">Disabled</label>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="phone" 
+                                           type="text" 
+                                           class="validate"
+                                           name = "phone"
+                                           onChange = {changeHandler}/>
+                                    <label for="phone">Телефон</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                            <input id="password" type="password" class="validate"/>
-                            <label for="password">Password</label>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                <input id="password" 
+                                       type="password"
+                                       class="validate"
+                                       onChange = {changeHandler}/>
+                                <label for="password">Пароль</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                            <input id="email" type="email" class="validate"/>
-                            <label for="email">Email</label>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                <input id="check_password" 
+                                       type="password" 
+                                       class="validate"
+                                       name = "check_password"
+                                       onChange = {changeHandler}/>
+                                <label for="check_password">Подтверждение пароля</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                            This is an inline input field:
-                            <div class="input-field inline">
-                                <input id="email_inline" type="email" class="validate"/>
-                                <label for="email_inline">Email</label>
-                                <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-                            </div>
-                            </div>
-                        </div>
                         </form>
                     </div>
                     </div>
                     <div class="card-action">
-                    <button className="btn grey lighten-1 balck-text">Зарегистрироваться</button>
+                        <button className="btn grey lighten-1 balck-text"
+                                onClick = {registerHandler}
+                                disabled = {loading}
+                        >
+                            Зарегистрироваться
+                        </button>
                     </div>
                 </div>
             </div>
