@@ -1,36 +1,49 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useHttp } from '../hooks/http.hook'
+import { useMessage } from '../hooks/message.hook'
 import image from './media/image2.jpg'
 
 export const AuthPage = () => {
-    const {loading, request} = useHttp()
+    const message = useMessage()
+    const {loading, request, error, clearError} = useHttp()
     const [form, setForm] = useState({
         email:'', password:''
     })
+
+    useEffect(() => {
+        message(error)
+        clearError()
+      }, [error, message, clearError])
+    
+      useEffect(() => {
+        window.M.updateTextFields()
+      }, [])
 
     const changeHandler = event =>{
         setForm({ ...form, [event.target.name]: event.target.value})
     }
     
+
     const loginHandler = async () => {
         try {
             const data = await request ('/api/auth/login', 'POST', {...form})
+            message(data.message)
             console.log('Data', data)
         } catch (e) {}
     }
 
     return(
         <div className = "row">
-            <div className = "col s6 offset-s3">
+            <div className = "col s6 offset-s3 center-align">
                 <h1>Практика 2021</h1>
                 <div className="card medium white darken-1 z-depth-2">
                     <div className="card-image center-align" style = {{padding:10}}>
                         <img src = {image} alt = "Руки" />
                             <span className="card-title white-text text-accent-4 ">Авторизация</span>
                     </div>
-                    <div class="card-content auth-page" >
-                        <div class="row">
-                            <div class="input-field col s6">
+                    <div className="card-content auth-page" >
+                        <div className="row">
+                            <div className="input-field col s6">
                                 <input id="email" 
                                        type="email" 
                                        class="validate" 
@@ -39,7 +52,7 @@ export const AuthPage = () => {
                                        onChange = {changeHandler}/>
                                 <label for="email">Email</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div className="input-field col s6">
                                 <input id="password" 
                                        type="password" 
                                        class="validate" 
@@ -52,7 +65,9 @@ export const AuthPage = () => {
                     </div>
                     <div className="card-action">
                         <button className="btn yellow darken-4" 
-                                style = {{marginRight:10}}>
+                                style = {{marginRight:10}}
+                                onClick = {loginHandler}
+                                disabled = {loading}>
                                     Вход
                         </button>
                         <a href = "/registration">Регистрация</a>

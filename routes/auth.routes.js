@@ -10,6 +10,7 @@ const router = Router()
 router.post(
     '/register',
     [
+        check('name', 'Введите имя').notEmpty(),
         check('email', 'Некорртектный email').isEmail(),
         check('password','Минимальная длина пароля 6 символов').isLength({min:6})
     ] ,
@@ -24,21 +25,22 @@ router.post(
         }
         //получаем поля
         //их будем брать из models
-        const{email, password} = req.body
-
+        const{name, email, phone, password, check_password} = req.body
         const candidate = await User.findOne({email})
         if(candidate){
            return res.status(400).json({message:'Такой пользователь уже существует'})
         }
+        if (check_password != password){
+            return res.status(400).json({message:'Пароли не совпадают'})
+        }
+        //else {return res.status(400).json({message:'Пароли типа совпадают?'})}
         const hashedPassword = await bcrypt.hash(password,12)
-        const user = new User({email, password:hashedPassword})
+        const user = new User({name, email, phone, password:hashedPassword, check_password:hashedPassword})
+        
         await user.save()
         res.status(201).json({message:'Пользователь создан'})
-
-        //отправляем поля
-
     }catch(e){
-        res.status(500).json({message:'Что-то не так, попробуйте еще раз'})
+        res.status(500).json({message:'Что-то не так, попробуйте еще раз Ошибка ниже'})
     }
 })
 
