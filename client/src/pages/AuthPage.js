@@ -1,9 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
+import { useHistory } from 'react-router'
+import { AuthContext } from '../context/AuthContext'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
 import image from './media/image2.jpg'
 
 export const AuthPage = () => {
+    const history = useHistory()
+    const auth = useContext(AuthContext)
     const message = useMessage()
     const {loading, request, error, clearError} = useHttp()
     const [form, setForm] = useState({
@@ -15,6 +19,7 @@ export const AuthPage = () => {
         clearError()
       }, [error, message, clearError])
     
+      //делает активными текстовые поля на окне входа   
       useEffect(() => {
         window.M.updateTextFields()
       }, [])
@@ -27,8 +32,10 @@ export const AuthPage = () => {
     const loginHandler = async () => {
         try {
             const data = await request ('/api/auth/login', 'POST', {...form})
-            message(data.message)
-            console.log('Data', data)
+           // message(data.message)
+           console.log('Data', data.userId)
+           auth.login(data.token, data.userId)
+           history.push(`/main/${data.userId}`)//типа перенаправление на страницу main/:id
         } catch (e) {}
     }
 

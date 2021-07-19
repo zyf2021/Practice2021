@@ -34,4 +34,4 @@ export const useAuth = () => {
 
 
   return { login, logout, token, userId, ready }
-}
+} 

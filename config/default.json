@@ -1,5 +1,6 @@
 {
     "port":5000,
     "mongoUri": "mongodb+srv://practice_admin:qwerty1234@cluster0.f3mbt.mongodb.net/app?retryWrites=true&w=majority",
-    "jwtSecret":"key practice Zyf"
+    "jwtSecret":"key practice Zyf",
+    "baseUrl" : "http://localhost:5000"
 }
