@@ -1,13 +1,13 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
-import {NavLink, useHistory, useParams} from 'react-router-dom'
+import {useHistory, useParams} from 'react-router-dom'
 import {AuthContext} from '../context/AuthContext'
 import {useHttp} from '../hooks/http.hook'
 import {Loader} from '../components/Loader'
 import {Profile} from '../components/Profile'
 
 export const MainPage = () => {
-    const history = useHistory()
-    const auth = useContext(AuthContext)
+    //const history = useHistory()
+    //const auth = useContext(AuthContext)
     const {token} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const[user, setUser] = useState(null)
@@ -24,12 +24,7 @@ export const MainPage = () => {
         }
     }, [token, userId, request])
     
-  
-    const logoutHandler = event => {
-      event.preventDefault()
-      auth.logout()
-      history.push('/')
-    }
+
     useEffect(() => {
         getUser()
       }, [getUser])

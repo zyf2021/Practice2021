@@ -1,4 +1,5 @@
 import React from 'react'
+const bcrypt = require('bcryptjs')
 
 export const Profile = ({ user }) => {
     return (
@@ -11,11 +12,10 @@ export const Profile = ({ user }) => {
                 <p>Имя : {user.name} </p>
                 <p>Email : {user.email} </p>
                 <p>Телефон : {user.phone} </p>
-                <p>Пароль : {user.password} </p>
                 </>
             </div>
             <div class="card-action">
-              <a class="waves-effect orange darken-4 btn">Типа кнопка</a>
+              <a class="waves-effect orange darken-4 btn" href="!#">Типа кнопка</a>
             </div>
           </div>
         </div>

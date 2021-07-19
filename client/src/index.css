@@ -35,3 +35,7 @@ body {
 div.registration div.row{
     margin-bottom: 10px;
 }
+
+button.btn.amber.lighten-1{
+    margin-right: 10px;
+}

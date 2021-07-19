@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import {NavLink, useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import {AuthContext} from '../context/AuthContext'
 
 export const Navbar = () => {
@@ -16,7 +16,7 @@ export const Navbar = () => {
     <header>
         <nav>
             <div class="nav-wrapper amber darken-3">
-            <a href="#" class="brand-logo center">Сведения о пользователе</a>
+            <a href="!#" class="brand-logo center">Сведения о пользователе</a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
             <li><a href="/" onClick={logoutHandler}>Выйти</a></li>
             </ul>   

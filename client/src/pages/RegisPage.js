@@ -33,7 +33,6 @@ export const RegisPage = () => {
     return(
         <div className = "row">
             <div className = "col s6 offset-s3 center-align">
-                <h1>Практика 2021</h1>
                 <div class="card amber lighten-5 registration">
                     <div class="card-content black-text">
                     <span class="card-title">Регистрация</span>
@@ -93,12 +92,13 @@ export const RegisPage = () => {
                     </div>
                     </div>
                     <div class="card-action">
-                        <button className="btn grey lighten-1 balck-text"
+                        <button className="btn amber lighten-1"
                                 onClick = {registerHandler}
                                 disabled = {loading}
                         >
                             Зарегистрироваться
                         </button>
+                        <a href = "/">Вход</a>
                     </div>
                 </div>
             </div>
