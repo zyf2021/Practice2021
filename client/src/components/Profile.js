@@ -8,7 +8,8 @@ export const Profile = ({ user }) => {
           <div class="card grey lighten-5 medium">
             <div class="card-content blue-grey-text text-darken-5">
               <span class="card-title">Профиль</span>
-                <>            
+                <>      
+                <p>ID: {user._id}</p>      
                 <p>Имя : {user.name} </p>
                 <p>Email : {user.email} </p>
                 <p>Телефон : {user.phone} </p>

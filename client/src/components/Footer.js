@@ -16,16 +16,24 @@ export const Footer = () => {
     <footer class="page-footer z-depth-2 amber darken-3">
                     <div class="container">
                         <div class="row">
-                        <div class="col 10 s12">
-                            <h5 class="white-text">Практическая работа. Главная страница</h5>
-                            <p class="grey-text text-lighten-4"></p>
+                        <div class="col 12 s12">
                         </div>
                         </div>
                     </div>
                 <div class="footer-copyright">
                     <div class="container">
                     © 2021 Copyright 
-                    <a className="right grey-text text-lighten-4" href="/" onClick={logoutHandler}>Выйти</a>
+                    <ul className="right">
+                      <li>
+                        <a className=" grey-text text-lighten-4" href="/" onClick={logoutHandler}>Выйти</a>
+                      </li>
+                      <li>
+                        <a className=" grey-text text-lighten-4" href='https://ru.freepik.com/photos/business'>Business фото создан(а) pressfoto - ru.freepik.com</a>
+                      </li>
+                      <li>
+                        <a className=" grey-text text-lighten-4" href='https://ru.freepik.com/vectors/business'>Business вектор создан(а) fullvector - ru.freepik.com</a>
+                      </li>
+                    </ul>
                     </div>
                 </div>
     </footer>
