@@ -10,6 +10,7 @@ const Admin = require('./models/Admin')
 const mongoose = require('mongoose')
 const express = require('express')
 const bcrypt = require('bcryptjs')
+const path = require('path')
 const app = express()
 
 
@@ -26,6 +27,14 @@ app.use(express.json({extended:true}))
 app.use('/api/auth/', require('./routes/auth.routes'))
 app.use('/api/user/', require('./routes/user.routes'))
 
+if (process.env.NODE_ENV === 'production'){
+    app.use('/', express.static(path.join(__dirname, 'client', 'build')))
+
+    app.get('*', (req, res) =>{
+        res.SendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
+
 const PORT = config.get('port')||5000
 
 
@@ -38,6 +47,15 @@ async function start(){
         })
         const adminBro = new AdminBro({
             //databases: [],
+            branding: {
+                companyName: 'Админпанель для Практики 2021',
+              },
+            dashboard: {
+                handler: async () => {
+                  return { user: 'name' }
+                },
+                component: AdminBro.bundle('./client/src/components/Dashboard.js')
+            },
             rootPath: '/admin',
             resources: [
                 {

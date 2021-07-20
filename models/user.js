@@ -5,7 +5,8 @@ const schema = new Schema({
     email:{type:String, required:true, unique:true},
     phone:{type:String, required:true},
     password:{type:String, required:true},
-    check_password:{type:String, required:true}
+    check_password:{type:String, required:true},
+    date_create:{type:Date, required:true}
 })
 
 module.exports = model('User', schema)

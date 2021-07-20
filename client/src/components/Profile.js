@@ -13,6 +13,7 @@ export const Profile = ({ user }) => {
                 <p>Имя : {user.name} </p>
                 <p>Email : {user.email} </p>
                 <p>Телефон : {user.phone} </p>
+                <p>Дата создания : {user.date_create} </p>
                 </>
             </div>
             <div class="card-action">

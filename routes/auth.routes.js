@@ -25,7 +25,7 @@ router.post(
         }
         //получаем поля
         //их будем брать из models
-        const{name, email, phone, password, check_password} = req.body
+        const{name, email, phone, password, check_password, date_create} = req.body
         const candidate = await User.findOne({email})
         if(candidate){
            return res.status(400).json({message:'Такой пользователь уже существует'})
@@ -35,7 +35,8 @@ router.post(
         }
         //else {return res.status(400).json({message:'Пароли типа совпадают?'})}
         const hashedPassword = await bcrypt.hash(password,12)
-        const user = new User({name, email, phone, password:hashedPassword, check_password:hashedPassword})
+        var now = new Date()
+        const user = new User({name, email, phone, password:hashedPassword, check_password:hashedPassword, date_create:now})
         
         await user.save()
         res.status(201).json({message:'Пользователь создан'})
